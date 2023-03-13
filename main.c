@@ -1,11 +1,163 @@
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+void	init_vars(t_varmlx *varmlx, t_vars *vars, char *file)
 {
-    if (argc != 2)
+	varmlx->title = file;
+	varmlx->size_winx = 1000;
+	varmlx->size_winy = 500;
+	vars->fd = open(file, O_RDONLY);
+}
+
+int	iscubfile(char *file)
+{
+	int	i;
+
+	i = 0;
+	while (file[i] != '.' && file[i] != '\0')
+		i++;
+	if (file[i] != '.')
+		return (0);
+	if (file[i + 1] != 'c')
+		return (0);
+	if (file[i + 2] != 'u')
+		return (0);
+	if (file[i + 3] != 'b')
+		return (0);
+	if (file[i + 4] != '\0')
+		return (0);
+	return (1);
+}
+
+int	error_handler(int argc, char **argv)
+{
+	if (argc != 2)
     {
-        printf("Error\n");
+        printf("Error: Only one argument allowed\n");
         return (0);
     }
+	if (iscubfile(argv[1]) == 0)
+	{
+		printf("Error: Not .cub file\n");
+        return (0);
+	}
+	return (1);
+}
+
+t_mapinfo	count_points_in_tab(char **tab)
+{
+	t_mapinfo	info;
+	int	x;
+	int	y;
+
+	info.points = 0;
+	info.size_y = 0;
+	info.size_x = 0;
+	y = 0;
+	while (tab[y])
+	{
+		x = 0;
+		while (tab[y][x] != '\0')
+		{
+			x++;
+			info.points++;
+		}
+		if (x > info.size_x)
+			info.size_x = x;
+		y++;
+	}
+	info.size_y = y;
+	return (info);
+}
+
+t_map	*ft_generate_map(char **parsed_data, t_mapinfo *info)
+{
+	t_map	*map;
+	int		i;
+	int		j;
+	int		k;
+
+	*info = count_points_in_tab(parsed_data);
+	map = malloc(sizeof(t_map) * (info->points) + 1);
+	if (!map)
+		return (0);
+	i = 0;
+	k = 0;
+	while (parsed_data[i])
+	{
+		j = 0;
+		while (parsed_data[i][j])
+		{
+			map[k].x = j;
+			map[k].y = i;
+			map[k].type = parsed_data[i][j];
+			j++;
+			k++;
+		}
+		i++;
+	}
+	return (map);
+}
+
+void	draw_sqr(t_map cmap, t_data img, t_mapinfo info)
+{
+	int	i;
+	int	j;
+
+	if (cmap.type == '1')
+	{
+		i = 0;
+		while (i++ < info.chunk_x)
+		{
+			j = 0;
+			while (j++ < info.chunk_y)
+				my_mlx_pixel_put(&img, cmap.x * info.chunk_x + i, cmap.y * info.chunk_y + j, 0x00FFFFFF);
+		}
+	}
+}
+
+void	drawing_map(t_vars *vars, t_varmlx *v)
+{
+	t_map		*cmap;
+	t_data		img;
+	t_mapinfo	info;
+	int			k;
+	int			offset;
+
+	img.img = mlx_new_image(v->mlx_ptr, v->size_winx, v->size_winy);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	cmap = ft_generate_map(vars->map_data, &info);
+	info.chunk_x = v->size_winx / info.size_x;
+	info.chunk_y = v->size_winy / info.size_y;
+	k = 0;
+	offset = 0;
+	while (k < info.points)
+	{
+		draw_sqr(cmap[k], img, info);
+//		if (cmap[k].type == '1')
+//			my_mlx_pixel_put(&img, cmap[k].x, cmap[k].y, 0x00FFFFFF);
+		k++;
+	}
+	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, img.img, 0, 0);
+	mlx_destroy_image(v->mlx_ptr, img.img);
+	free(cmap);
+}
+
+int main(int argc, char **argv)
+{
+	t_varmlx	v;
+	t_vars		vars;
+
+    if (error_handler(argc, argv) == 0)
+		return (0);
+	vars.fd = open(argv[1], O_RDONLY);
+	init_vars(&v, &vars, argv[1]);
+	v.mlx_ptr = mlx_init();
+	v.win_ptr = mlx_new_window(v.mlx_ptr, v.size_winx, v.size_winy, v.title);
+    parse_file(&vars);
+	drawing_map(&vars, &v);
+	mlx_loop(v.mlx_ptr);
+	free(v.mlx_ptr);
+	free(v.win_ptr);
+	close(vars.fd);
     return (0);
 }
