@@ -9,7 +9,7 @@ OBJS	=	${SRCS:.c=.o}
 CC		=	gcc
 RM		=	rm -f
 
-CFLAGS	=	-Wall -Wextra -g#-Werror #-fsanitize=address
+CFLAGS	=	-Wall -Wextra #-g #-Werror #-fsanitize=address
 
 LFLAGS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
