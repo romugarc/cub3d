@@ -6,7 +6,7 @@
 /*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
-/*   Updated: 2023/02/27 19:36:06 by warnora          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:13:40 by warnora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ void	parse_file(t_vars *vars)
 	}
 	vars->map_data = ft_split(data, '\n');
 }
-

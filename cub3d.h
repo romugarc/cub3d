@@ -45,7 +45,34 @@ typedef	struct s_mapinfo
 	int	points;
 	int	size_x;
 	int	size_y;
+	double	start_x;
+	double	start_y;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
 }	t_mapinfo;
+
+typedef struct	s_cam
+{
+	double	camera_x;
+	double	plane_x;
+	double	plane_y;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perpwalldist;
+	int		hit;
+	int		side;
+	int		lineheight;
+	int		step_x;
+	int		step_y;
+	int		draw_start;
+	int		draw_end;
+}	t_cam;
 
 typedef struct s_map
 {
@@ -54,6 +81,23 @@ typedef struct s_map
 	char	type;
 }	t_map;
 
+typedef struct	s_params
+{
+	t_map		*map;
+	t_cam		cam;
+	t_mapinfo	info;
+	t_vars		v;
+	t_varmlx	vmlx;
+	t_data		img;
+}	t_params;
+
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	parse_file(t_vars *vars);
+void	ft_free_tab(char **tab);
+void	init_vars(t_varmlx *varmlx, t_vars *vars, char *file);
+int		init_all(t_params *p);
+t_map	*init_map(char **parsed_data, t_mapinfo info);
+void	init_playerpos(t_map *cmap, t_mapinfo *info);
+t_mapinfo	count_points_in_tab(char **tab);
 #endif

@@ -1,6 +1,6 @@
 NAME	= cub3D
 
-SRCS	=	main.c parsing.c cub_utils.c
+SRCS	=	main.c parsing.c cub_utils.c free_functions.c init.c
 
 HEADER_FILES = cub3d.h
 
