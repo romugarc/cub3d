@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_north.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
+/*   Updated: 2023/02/27 19:36:06 by warnora          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
+
+static void	get_north_next(t_vars *vars, int *i, int *j)
+{
+	vars->north[(*j)] = vars->gnl_ret[(*i)];
+	(*i) = (*i) + 1;
+	(*j) = (*j) + 1;
+}
+
+void	get_north(t_vars *vars, int i)
+{
+	int	j;
+
+	j = 0;
+	i++;
+	if (vars->gnl_ret[i] == 'O')
+		i++;
+	else
+		fail("Error\nBad format for north\n");
+	i++;
+	while (vars->gnl_ret[i] == ' ')
+		i++;
+	if (vars->gnl_ret[i] == '\0')
+		fail("Error\nMissing path for north\n");
+	vars->north = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
+	if (!vars->north)
+		fail("Malloc error !");
+	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')
+		get_north_next(vars, &i, &j);
+	vars->north[j] = '\0';
+	j = open(vars->north, O_RDONLY);
+	if (j == -1)
+		fail("Error\nBad path for north\n");
+	close(j);
+}
