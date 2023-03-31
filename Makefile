@@ -1,6 +1,27 @@
 NAME	= cub3D
 
-SRCS	=	main.c parsing.c cub_utils.c free_functions.c init.c
+SRCS	=	main.c					\
+			cub_utils.c				\
+			free_functions.c		\
+			init.c					\
+			movement.c				\
+			rotation_camera.c		\
+			raycast_lines.c			\
+			draw.c					\
+			hooks.c					\
+									\
+			parsing/fail.c			\
+			parsing/get_east.c		\
+			parsing/get_west.c		\
+			parsing/get_floor.c		\
+			parsing/get_north.c		\
+			parsing/check_map.c		\
+			parsing/get_south.c		\
+			parsing/ft_splitv2.c	\
+			parsing/check_color.c	\
+			parsing/get_ceiling.c	\
+			parsing/parsing.c		\
+			parsing/parsing_next.c	\
 
 HEADER_FILES = cub3d.h
 
