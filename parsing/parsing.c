@@ -34,32 +34,32 @@ static void	check_double(t_vars *vars, int i)
 
 	c = vars->gnl_ret[i];
 	if (c == 'N' && vars->north)
-		fail("Error\nPut one texture per face\n");
+		fail("Error\nPut one texture per face\n", vars);
 	else if (c == 'S' && vars->south)
-		fail("Error\nPut one texture per face\n");
+		fail("Error\nPut one texture per face\n", vars);
 	else if (c == 'E' && vars->east)
-		fail("Error\nPut one texture per face\n");
+		fail("Error\nPut one texture per face\n", vars);
 	else if (c == 'W' && vars->west)
-		fail("Error\nPut one texture per face\n");
+		fail("Error\nPut one texture per face\n", vars);
 	else if (c == 'F' && vars->floor)
-		fail("Error\nPut three colors for the floor one time\n");
+		fail("Error\nPut three colors for the floor one time\n", vars);
 	else if (c == 'C' && vars->ceiling)
-		fail("Error\nPut three colors for the ceiling one time\n");
+		fail("Error\nPut three colors for the ceiling one time\n", vars);
 	else if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != 'F'
 		&& c != 'C' && c != '1' && c != '\n')
-			fail("Error\nPut path, colors and closed map only\n");
+			fail("Error\nPut path, colors and closed map only\n", vars);
 }
 
 static int	checking(t_vars *vars, int *mapping)
 {
 	if (check_path_and_colors(vars) == FALSE)
-		fail("Error\nPut path and colors before the map\n");
+		fail("Error\nPut 4 path and 2 colors before the map\n", vars);
 	(*mapping) = 1;
 	vars->map_in_str = ft_strdup(vars->gnl_ret);
 	return (0);
 }
 
-static int	parse_line(t_vars *vars, int *mapping)
+static void	parse_line(t_vars *vars, int *mapping)
 {
 	int		i;
 	char	*dump;
@@ -69,7 +69,7 @@ static int	parse_line(t_vars *vars, int *mapping)
 		i++;
 	check_double(vars, i);
 	if (vars->gnl_ret[i] == '1' && (*mapping) == 2)
-		fail("Error\nPut one map only\n");
+		fail("Error\nPut one map only\n", vars);
 	if (map_char(vars->gnl_ret[i]) == FALSE && (*mapping == 1))
 		(*mapping) = 2;
 	else if (map_char(vars->gnl_ret[i]) == TRUE && (*mapping) == 0)
@@ -81,9 +81,8 @@ static int	parse_line(t_vars *vars, int *mapping)
 		free(dump);
 	}
 	if (vars->gnl_ret[i] == '\n')
-		return (0);
+		return ;
 	distribution(vars, i);
-	return (0);
 }
 
 void	parse_file(t_vars *vars)
@@ -96,13 +95,13 @@ void	parse_file(t_vars *vars)
 	{
 		vars->gnl_ret = get_next_line(vars->fd);
 		if (vars->gnl_ret != NULL)
-		{
-			if (parse_line(vars, &mapping) == -1)
-				exit(EXIT_FAILURE);
-		}
+			parse_line(vars, &mapping);
 		free(vars->gnl_ret);
 	}
+	check_vars(vars);
 	vars->map_data = ft_splitv2(vars->map_in_str, '\n');
+	if (vars->map_data == NULL)
+		fail("Malloc error\n", vars);
 	check_map(vars);
 	free(vars->map_in_str);
 }

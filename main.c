@@ -32,21 +32,25 @@
 	}
 }*/
 
-int	error_handler(int argc, char **argv)
+void	error_handler(int argc, char **argv)
 {
 	if (argc != 2)
-		fail("Error\nOnly one argument allowed\n");
+	{
+		ft_putstr_fd("Error\nOnly one argument allowed\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	if (iscubfile(argv[1]) == 0)
-		fail("Error\nNot .cub file\n");
-	return (1);
+	{
+		ft_putstr_fd("Error\nNot .cub file\n", 2);
+		exit(EXIT_FAILURE);
+	}
 }
 
 int main(int argc, char **argv)
 {
 	t_params	p;
 
-    if (error_handler(argc, argv) == 0)
-		return (0);
+	error_handler(argc, argv);
 	//p.v.fd = open(argv[1], O_RDONLY);
 	init_vars(&p.vmlx, &p.v, argv[1]);
 	parse_file(&p.v);

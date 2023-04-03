@@ -28,20 +28,20 @@ void	get_east(t_vars *vars, int i)
 	if (vars->gnl_ret[i] == 'A')
 		i++;
 	else
-		fail("Error\nBad format for east\n");
+		fail("Error\nBad format for east\n", vars);
 	i++;
 	while (vars->gnl_ret[i] == ' ')
 		i++;
 	if (vars->gnl_ret[i] == '\0')
-		fail("Error\nMissing path for east\n");
+		fail("Error\nMissing path for east\n", vars);
 	vars->east = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
 	if (!vars->east)
-		fail("Malloc error !");
+		fail("Malloc error !", vars);
 	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')
 		check_path(vars, &i, &j);
 	vars->east[j] = '\0';
 	j = open(vars->east, O_RDONLY);
 	if (j == -1)
-		fail("Error\nBad path for east\n");
+		fail("Error\nBad path for east\n", vars);
 	close(j);
 }

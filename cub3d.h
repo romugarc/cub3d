@@ -129,13 +129,10 @@ void	draw_line(t_cam cam, t_data img, int x);
 int		key_hook(int keycode, t_params *prms);
 int		close_window(t_params *prms);
 //parsing
-int		map_char(char c);
-int		check_path_and_colors(t_vars *vars);
-int		strlen_itoc(char *str, int i, char c);
-int		strlen_itoc(char *str, int i, char c);
-void	fail(char *str);
 void	check_map(t_vars *vars);
 void	parse_file(t_vars *vars);
+void	check_vars(t_vars *vars);
+void	fail(char *str, t_vars *vars);
 void	get_east(t_vars *vars, int i);
 void	get_west(t_vars *vars, int i);
 void	get_floor(t_vars *vars, int i);
@@ -144,5 +141,9 @@ void	get_north(t_vars *vars, int i);
 void	get_ceiling(t_vars *vars, int i);
 void	check_all_color(t_vars *vars, int i);
 char	**ft_splitv2(const char *str, char c);
+int		map_char(char c);
+int		check_path_and_colors(t_vars *vars);
+int		strlen_itoc(char *str, int i, char c);
+int		strlen_itoc(char *str, int i, char c);
 
 #endif

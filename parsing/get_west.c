@@ -28,20 +28,20 @@ void	get_west(t_vars *vars, int i)
 	if (vars->gnl_ret[i] == 'E')
 		i++;
 	else
-		fail("Error\nBad format for west\n");
+		fail("Error\nBad format for west\n", vars);
 	i++;
 	while (vars->gnl_ret[i] == ' ')
 		i++;
 	if (vars->gnl_ret[i] == '\0')
-		fail("Error\nMissing path for west\n");
+		fail("Error\nMissing path for west\n", vars);
 	vars->west = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
 	if (!vars->west)
-		fail("Malloc error !");
+		fail("Malloc error !", vars);
 	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')
 		get_west_next(vars, &i, &j);
 	vars->west[j] = '\0';
 	j = open(vars->west, O_RDONLY);
 	if (j == -1)
-		fail("Error\nBad path for west\n");
+		fail("Error\nBad path for west\n", vars);
 	close(j);
 }

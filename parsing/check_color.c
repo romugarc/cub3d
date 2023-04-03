@@ -25,7 +25,7 @@ static void	check_color_size(t_vars *vars, int i)
 		i++;
 	}
 	if (nb > 255)
-		fail("Error\nBad color of ceiling or floor\n");
+		fail("Error\nBad color of ceiling or floor\n", vars);
 }
 
 void	check_all_color(t_vars *vars, int i)
@@ -39,5 +39,5 @@ void	check_all_color(t_vars *vars, int i)
 			i++;
 	}
 	if (vars->gnl_ret[i] != '\0')
-		fail("Error\nBad format of ceiling or floor\n");
+		fail("Error\nBad format of ceiling or floor\n", vars);
 }

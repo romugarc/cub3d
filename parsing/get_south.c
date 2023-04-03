@@ -28,20 +28,20 @@ void	get_south(t_vars *vars, int i)
 	if (vars->gnl_ret[i] == 'O')
 		i++;
 	else
-		fail("Error\nBad format for south\n");
+		fail("Error\nBad format for south\n", vars);
 	i++;
 	while (vars->gnl_ret[i] == ' ')
 		i++;
 	if (vars->gnl_ret[i] == '\0')
-		fail("Error\nMissing path for south\n");
+		fail("Error\nMissing path for south\n", vars);
 	vars->south = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
 	if (!vars->south)
-		fail("Malloc error !");
+		fail("Malloc error !", vars);
 	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')
 		get_south_next(vars, &i, &j);
 	vars->south[j] = '\0';
 	j = open(vars->south, O_RDONLY);
 	if (j == -1)
-		fail("Error\nBad path fot south\n");
+		fail("Error\nBad path fot south\n", vars);
 	close(j);
 }

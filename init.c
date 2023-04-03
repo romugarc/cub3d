@@ -12,6 +12,8 @@ void	init_vars(t_varmlx *varmlx, t_vars *vars, char *file)
 	vars->west = NULL;
 	vars->floor = NULL;
 	vars->ceiling = NULL;
+	vars->gnl_ret = NULL;
+	vars->map_data = NULL;
 	vars->map_in_str = NULL;
 }
 

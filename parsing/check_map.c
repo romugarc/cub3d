@@ -12,12 +12,12 @@
 
 #include "../cub3d.h"
 
-static void	check_nb_of_cardinal_points(int nb)
+static void	check_nb_of_cardinal_points(int nb, t_vars *vars)
 {
 	if (nb < 1)
-		fail("Error\nPut N, S, E or W for player spawn\n");
+		fail("Error\nPut N, S, E or W for player spawn\n", vars);
 	else if (nb > 1)
-		fail("Error\nSeveral spawn in the map\n");
+		fail("Error\nSeveral spawn in the map\n", vars);
 }
 
 static void	check_all_char(t_vars *vars)
@@ -38,14 +38,14 @@ static void	check_all_char(t_vars *vars)
 			c = vars->map_data[l][co];
 			if (c != ' ' && c != '0' && c != '1' && c != 'N' && c != 'S'
 				&& c != 'E' && c != 'W')
-					fail("Error\nBad character in the map\n");
+					fail("Error\nBad character in the map\n", vars);
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 				nb++;
 			co++;
 		}
 		l++;
 	}
-	check_nb_of_cardinal_points(nb);
+	check_nb_of_cardinal_points(nb, vars);
 }
 
 void	check_map(t_vars *vars)
@@ -66,7 +66,7 @@ void	check_map(t_vars *vars)
 			{
 				if (vars->map_data[l][co + 1] == ' ' || vars->map_data[l][co - 1] == ' '
 					|| vars->map_data[l + 1][co] == ' ' || vars->map_data[l - 1][co] == ' ')
-						fail("Error\nThe map is open\n");
+						fail("Error\nThe map is open\n", vars);
 			}
 			co++;
 		}

@@ -28,20 +28,20 @@ void	get_north(t_vars *vars, int i)
 	if (vars->gnl_ret[i] == 'O')
 		i++;
 	else
-		fail("Error\nBad format for north\n");
+		fail("Error\nBad format for north\n", vars);
 	i++;
 	while (vars->gnl_ret[i] == ' ')
 		i++;
 	if (vars->gnl_ret[i] == '\0')
-		fail("Error\nMissing path for north\n");
+		fail("Error\nMissing path for north\n", vars);
 	vars->north = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
 	if (!vars->north)
-		fail("Malloc error !");
+		fail("Malloc error", vars);
 	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')
 		get_north_next(vars, &i, &j);
 	vars->north[j] = '\0';
 	j = open(vars->north, O_RDONLY);
 	if (j == -1)
-		fail("Error\nBad path for north\n");
+		fail("Error\nBad path for north\n", vars);
 	close(j);
 }

@@ -49,7 +49,7 @@ static char	**space_in_tab(char **tab, const char *str, char c, int max_cl[2])
 		co = 0;
 		tab[l] = malloc(sizeof(char) * max_cl[0] + 1);
 		if (!tab[l])
-			fail("Malloc error\n");
+			return (NULL);
 		while (co < max_cl[0])
 		{
 			tab[l][co] = ' ';
@@ -70,6 +70,12 @@ static void	ft_splitv2_init(int *i, int *l, int *co, int *max_cl)
 	(*max_cl) = 0;
 }
 
+void	co_and_l(int *co, int *l)
+{
+	(*co) = 0;
+	(*l) = (*l) + 1;
+}
+
 char	**ft_splitv2(const char *str, char c)
 {
 	int		i;
@@ -82,10 +88,7 @@ char	**ft_splitv2(const char *str, char c)
 	while (str[i])
 	{
 		if (str[i] == c)
-		{
-			co = 0;
-			l++;
-		}
+			co_and_l(&co, &l);
 		co++;
 		if (co > max_cl[0])
 			max_cl[0] = co + 3;
@@ -93,7 +96,7 @@ char	**ft_splitv2(const char *str, char c)
 	}
 	tab = malloc(sizeof(char *) * (l + 3 + 1));
 	if (!tab)
-		fail("Malloc error\n");
+		return (NULL);
 	max_cl[1] = l + 3;
 	return (space_in_tab(tab, str, c, max_cl));
 }
