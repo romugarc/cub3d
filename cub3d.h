@@ -122,6 +122,7 @@ int		init_playerpos(t_map *cmap, t_mapinfo *info, t_cam *cam);
 t_mapinfo	count_points_in_tab(char **tab);
 void	movement(int keycode, t_params *prms);
 void	rotation_camera(int keycode, t_params *p);
+void	floor_cast(t_params	*p);
 void	raycast_lines(t_params *p);
 int		iscubfile(char *file);
 void	drawing_map(t_params *p);

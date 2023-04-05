@@ -18,6 +18,8 @@ int	close_window(t_params *prms)
 
 int	key_hook(int keycode, t_params *prms)
 {
+	if (keycode == 65307)
+		close_window(prms);
 	if ((keycode >= 65361 && keycode <= 65364))
 		rotation_camera(keycode, prms);
 	else if (keycode == 119 || keycode == 97

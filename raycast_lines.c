@@ -1,5 +1,36 @@
 #include "cub3d.h"
 
+void	floor_cast(t_params	*p)
+{
+	int	y;
+	int	x;
+
+	//p->v.floor et p->v.ceiling
+	y = 0;
+	while (y < p->vmlx.size_winy / 2)
+	{
+		//plafond
+		x = 0;
+		while (x < p->vmlx.size_winx)
+		{
+			my_mlx_pixel_put(&p->img, x, y, 0x0000FFFF);
+			x++;
+		}
+		y++;
+	}
+	while (y < p->vmlx.size_winy)
+	{
+		//sol
+		x = 0;
+		while (x < p->vmlx.size_winx)
+		{
+			my_mlx_pixel_put(&p->img, x, y, 0x0000FF00);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	raycast_lines(t_params *p)
 {
 	int	i;
@@ -60,20 +91,30 @@ void	raycast_lines(t_params *p)
 				p->cam.sidedist_x += p->cam.deltadist_x;
 				p->info.map_x += p->cam.step_x;
 				//check les valeurs absolues dir_x et dir_y avant de décider du side
-				p->cam.side = 0;
+				if (p->cam.step_x == 1)
+					p->cam.side = 0;
+				else
+					p->cam.side = 2;
 			}
 			else
 			{
 				p->cam.sidedist_y += p->cam.deltadist_y;
 				p->info.map_y += p->cam.step_y;
-				p->cam.side = 1;
+				if (p->cam.step_y == 1)
+					p->cam.side = 1;
+				else
+					p->cam.side = 3;
 			}
 			//printf("%d\t%d\n", p->info.map_x, p->info.map_y);
-			if (p->v.map_data[p->info.map_y][p->info.map_x] == '1')
+			if (p->info.map_y < 0 || p->info.map_y >= p->info.size_y)
+				p->cam.hit = 1;
+			else if (p->info.map_x < 0 || p->info.map_x > p->info.size_x)
+				p->cam.hit = 1;
+			else if (p->v.map_data[p->info.map_y][p->info.map_x] == '1')
 				p->cam.hit = 1;
 		}
 		//printf("side%d\n", p->cam.side);
-		if (p->cam.side == 0)
+		if (p->cam.side == 0 || p->cam.side == 2)
 			p->cam.perpwalldist = p->cam.sidedist_x - p->cam.deltadist_x;
 		else
 			p->cam.perpwalldist = p->cam.sidedist_y - p->cam.deltadist_y;

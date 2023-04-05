@@ -54,10 +54,10 @@ int main(int argc, char **argv)
 	//p.v.fd = open(argv[1], O_RDONLY);
 	init_vars(&p.vmlx, &p.v, argv[1]);
 	parse_file(&p.v);
-	p.vmlx.mlx_ptr = mlx_init();
-	p.vmlx.win_ptr = mlx_new_window(p.vmlx.mlx_ptr, p.vmlx.size_winx, p.vmlx.size_winy, p.vmlx.title);
 	if (init_all(&p) == 1)
 		return (1);
+	p.vmlx.mlx_ptr = mlx_init();
+	p.vmlx.win_ptr = mlx_new_window(p.vmlx.mlx_ptr, p.vmlx.size_winx, p.vmlx.size_winy, p.vmlx.title);
 	drawing_map(&p);
 	mlx_hook(p.vmlx.win_ptr, 2, 1L<<0, key_hook, &p);
 	mlx_hook(p.vmlx.win_ptr, 17, 1L<<0, close_window, &p);
