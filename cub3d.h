@@ -88,10 +88,14 @@ typedef struct	s_cam
 
 typedef struct s_tex
 {
-	int		texnum;
-	double	wall_x;
+	void	*text;
+	char	*text_adr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width_img;
+	int		height_img;
 }	t_tex;
-
 
 typedef struct s_map
 {

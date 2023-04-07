@@ -7,6 +7,7 @@ SRCS	=	main.c					\
 			movement.c				\
 			rotation_camera.c		\
 			raycast_lines.c			\
+			load_textures.c			\
 			draw.c					\
 			hooks.c					\
 									\
