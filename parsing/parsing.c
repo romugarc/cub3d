@@ -104,4 +104,5 @@ void	parse_file(t_vars *vars)
 		fail("Malloc error\n", vars);
 	check_map(vars);
 	free(vars->map_in_str);
+	get_colors(vars);
 }

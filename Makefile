@@ -11,16 +11,17 @@ SRCS	=	main.c					\
 			hooks.c					\
 									\
 			parsing/fail.c			\
+			parsing/parsing.c		\
 			parsing/get_east.c		\
 			parsing/get_west.c		\
 			parsing/get_floor.c		\
 			parsing/get_north.c		\
 			parsing/check_map.c		\
 			parsing/get_south.c		\
+			parsing/get_colors.c	\
 			parsing/ft_splitv2.c	\
 			parsing/check_color.c	\
 			parsing/get_ceiling.c	\
-			parsing/parsing.c		\
 			parsing/parsing_next.c	\
 
 HEADER_FILES = cub3d.h
