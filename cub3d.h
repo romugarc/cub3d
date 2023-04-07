@@ -45,6 +45,8 @@ typedef struct s_vars
 	char	*gnl_ret;
 	char	**map_data;
 	char	*map_in_str;
+	int		color_floor;
+	int		color_ceiling;
 	int		fd;
 }	t_vars;
 
@@ -136,6 +138,7 @@ int		close_window(t_params *prms);
 //parsing
 void	check_map(t_vars *vars);
 void	parse_file(t_vars *vars);
+void	get_colors(t_vars *vars);
 void	check_vars(t_vars *vars);
 void	fail(char *str, t_vars *vars);
 void	get_east(t_vars *vars, int i);
