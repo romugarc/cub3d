@@ -101,10 +101,7 @@ int	init_playerpos(t_map *cmap, t_mapinfo *info, t_cam *cam)
 
 void	init_mapinfo(t_params *p)
 {
-
 	init_playerpos(p->map, &p->info, &p->cam);
-	p->info.chunk_x = p->vmlx.size_winx / p->info.size_x;
-	p->info.chunk_y = p->vmlx.size_winy / p->info.size_y;
 }
 
 void	init_cam(t_params *p)
@@ -117,9 +114,15 @@ void	init_cam(t_params *p)
 int	init_all(t_params *p)
 {
 	p->info = count_points_in_tab(p->v.map_data);
+	p->tex = malloc(sizeof(t_tex) * (4 + 1));
+	if (!p->tex)
+		return (1);
 	p->map = init_map(p->v.map_data, p->info);
 	if (!p->map)
+	{
+		free(p->tex);
 		return (1);
+	}
 	init_mapinfo(p);
 	init_cam(p);
 	return (0);

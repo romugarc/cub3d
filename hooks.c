@@ -12,6 +12,7 @@ int	close_window(t_params *prms)
 	free(prms->v.floor);
 	free(prms->v.ceiling);
 	free(prms->map);
+	free(prms->tex);
 	close(prms->v.fd);
 	exit(0);
 }

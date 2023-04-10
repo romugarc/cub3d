@@ -52,8 +52,6 @@ typedef struct s_vars
 
 typedef	struct s_mapinfo
 {
-	int	chunk_x;
-	int	chunk_y;
 	int	points;
 	int	size_x;
 	int	size_y;
@@ -97,6 +95,8 @@ typedef struct s_tex
 	int		endian;
 	int		width_img;
 	int		height_img;
+	int		tex_x;
+	int		tex_y;
 }	t_tex;
 
 typedef struct s_map
@@ -114,7 +114,7 @@ typedef struct	s_params
 	t_vars		v;
 	t_varmlx	vmlx;
 	t_data		img;
-	t_tex		tex;
+	t_tex		*tex;
 }	t_params;
 
 
@@ -132,9 +132,12 @@ void	floor_cast(t_params	*p);
 void	raycast_lines(t_params *p);
 int		iscubfile(char *file);
 void	drawing_map(t_params *p);
-void	draw_line(t_cam cam, t_data img, int x);
+void	draw_line(t_cam cam, t_data img, t_tex tex, int x, int s_wy);
 int		key_hook(int keycode, t_params *prms);
 int		close_window(t_params *prms);
+int		get_tex_x(t_cam cam, t_mapinfo info, t_tex tex);
+int		get_text_pixel(t_tex tex);
+int		load_textures(t_params *p, char *texture_path, int i);
 //parsing
 void	check_map(t_vars *vars);
 void	parse_file(t_vars *vars);

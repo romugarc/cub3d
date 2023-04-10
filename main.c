@@ -51,13 +51,16 @@ int main(int argc, char **argv)
 	t_params	p;
 
 	error_handler(argc, argv);
-	//p.v.fd = open(argv[1], O_RDONLY);
 	init_vars(&p.vmlx, &p.v, argv[1]);
 	parse_file(&p.v);
 	if (init_all(&p) == 1)
 		return (1);
-	p.vmlx.mlx_ptr = mlx_init();
+	p.vmlx.mlx_ptr = mlx_init(); //sécuriser malloc?
 	p.vmlx.win_ptr = mlx_new_window(p.vmlx.mlx_ptr, p.vmlx.size_winx, p.vmlx.size_winy, p.vmlx.title);
+	//load_textures(&p, p.v.west, 0);
+	//load_textures(&p, p.v.east, 0);
+	//load_textures(&p, p.v.north, 0);
+	//load_textures(&p, p.v.south, 0);
 	drawing_map(&p);
 	mlx_hook(p.vmlx.win_ptr, 2, 1L<<0, key_hook, &p);
 	mlx_hook(p.vmlx.win_ptr, 17, 1L<<0, close_window, &p);

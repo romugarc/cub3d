@@ -5,26 +5,23 @@ void	floor_cast(t_params	*p)
 	int	y;
 	int	x;
 
-	//p->v.floor et p->v.ceiling
 	y = 0;
 	while (y < p->vmlx.size_winy / 2)
 	{
-		//plafond
 		x = 0;
 		while (x < p->vmlx.size_winx)
 		{
-			my_mlx_pixel_put(&p->img, x, y, 0x0000FFFF);
+			my_mlx_pixel_put(&p->img, x, y, p->v.color_floor);
 			x++;
 		}
 		y++;
 	}
 	while (y < p->vmlx.size_winy)
 	{
-		//sol
 		x = 0;
 		while (x < p->vmlx.size_winx)
 		{
-			my_mlx_pixel_put(&p->img, x, y, 0x0000FF00);
+			my_mlx_pixel_put(&p->img, x, y, p->v.color_ceiling);
 			x++;
 		}
 		y++;
@@ -132,7 +129,13 @@ void	raycast_lines(t_params *p)
 		else if (p->cam.draw_end >= p->vmlx.size_winy)
 			p->cam.draw_end = p->vmlx.size_winy - 1;
 		//printf("%d\t%d\t%d\n", i, p->cam.draw_start, p->cam.draw_end);
-		draw_line(p->cam, p->img, i);
+		p->tex[p->cam.side].tex_x = get_tex_x(p->cam, p->info, p->tex[p->cam.side]);
+		//printf("a%d\t", p->tex[0].tex_x);
+		draw_line(p->cam, p->img, p->tex[p->cam.side], i, p->vmlx.size_winy);
+		//if (p->tex[0].tex_x < p->tex[0].width_img)
+		//	p->tex[0].tex_x += 1;
+		//else
+		//	p->tex[0].tex_x = 0;
 		i++;
 	}
 }
