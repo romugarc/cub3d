@@ -90,13 +90,15 @@ void	drawing_map(t_params *p)
 	p->img.img = mlx_new_image(p->vmlx.mlx_ptr, p->vmlx.size_winx, p->vmlx.size_winy);
 	p->img.addr = mlx_get_data_addr(p->img.img, &p->img.bits_per_pixel, &p->img.line_length, &p->img.endian);
 	floor_cast(p);
-	load_textures(p, p->v.east, 0);
-	load_textures(p, p->v.south, 1);
-	load_textures(p, p->v.west, 2);
-	load_textures(p, p->v.north, 3);
+	//load_textures(p, p->v.east, 0);
+	//load_textures(p, p->v.south, 1);
+	//load_textures(p, p->v.west, 2);
+	//load_textures(p, p->v.north, 3);
+	load_textures(&p->tex[0], p->vmlx, p->v.east);
+	load_textures(&p->tex[1], p->vmlx, p->v.south);
+	load_textures(&p->tex[2], p->vmlx, p->v.west);
+	load_textures(&p->tex[3], p->vmlx, p->v.north);
 	raycast_lines(p);
-	mlx_put_image_to_window(p->vmlx.mlx_ptr, p->vmlx.win_ptr, p->img.img, 0, 0);
-	mlx_destroy_image(p->vmlx.mlx_ptr, p->img.img);
 	free(p->tex[0].text);
 	free(p->tex[0].text_adr);
 	free(p->tex[1].text);
@@ -105,4 +107,6 @@ void	drawing_map(t_params *p)
 	free(p->tex[2].text_adr);
 	free(p->tex[3].text);
 	free(p->tex[3].text_adr);
+	mlx_put_image_to_window(p->vmlx.mlx_ptr, p->vmlx.win_ptr, p->img.img, 0, 0);
+	mlx_destroy_image(p->vmlx.mlx_ptr, p->img.img);
 }
