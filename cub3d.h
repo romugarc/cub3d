@@ -137,8 +137,8 @@ int		key_hook(int keycode, t_params *prms);
 int		close_window(t_params *prms);
 int		get_tex_x(t_cam cam, t_mapinfo info, t_tex tex);
 int		get_text_pixel(t_tex tex);
-int		load_textures(t_tex *tex, t_varmlx vmlx, char *texture_path);
-//int		load_textures(t_params *p, char *texture_path, int i);
+//int		load_textures(t_tex *tex, t_varmlx vmlx, char *texture_path);
+int		load_textures(t_params *p, char *texture_path, int i);
 //parsing
 void	check_map(t_vars *vars);
 void	parse_file(t_vars *vars);

@@ -94,10 +94,18 @@ void	drawing_map(t_params *p)
 	//load_textures(p, p->v.south, 1);
 	//load_textures(p, p->v.west, 2);
 	//load_textures(p, p->v.north, 3);
-	load_textures(&p->tex[0], p->vmlx, p->v.east);
+	/*load_textures(&p->tex[0], p->vmlx, p->v.east);
 	load_textures(&p->tex[1], p->vmlx, p->v.south);
 	load_textures(&p->tex[2], p->vmlx, p->v.west);
-	load_textures(&p->tex[3], p->vmlx, p->v.north);
+	load_textures(&p->tex[3], p->vmlx, p->v.north);*/
+	p->tex[0].text = mlx_xpm_file_to_image(p->vmlx.mlx_ptr, p->v.east, &p->tex[0].width_img, &p->tex[0].height_img);
+	p->tex[0].text_adr = mlx_get_data_addr(p->tex[0].text, &p->tex[0].bits_per_pixel, &p->tex[0].line_length, &p->tex[0].endian);
+	p->tex[1].text = mlx_xpm_file_to_image(p->vmlx.mlx_ptr, p->v.south, &p->tex[1].width_img, &p->tex[1].height_img);
+	p->tex[1].text_adr = mlx_get_data_addr(p->tex[1].text, &p->tex[1].bits_per_pixel, &p->tex[1].line_length, &p->tex[1].endian);
+	p->tex[2].text = mlx_xpm_file_to_image(p->vmlx.mlx_ptr, p->v.west, &p->tex[2].width_img, &p->tex[2].height_img);
+	p->tex[2].text_adr = mlx_get_data_addr(p->tex[2].text, &p->tex[2].bits_per_pixel, &p->tex[2].line_length, &p->tex[2].endian);
+	p->tex[3].text = mlx_xpm_file_to_image(p->vmlx.mlx_ptr, p->v.north, &p->tex[3].width_img, &p->tex[3].height_img);
+	p->tex[3].text_adr = mlx_get_data_addr(p->tex[3].text, &p->tex[3].bits_per_pixel, &p->tex[3].line_length, &p->tex[3].endian);
 	raycast_lines(p);
 	free(p->tex[0].text);
 	free(p->tex[0].text_adr);
