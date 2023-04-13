@@ -1,37 +1,5 @@
 #include "cub3d.h"
 
-/*void	draw_sqr(t_map cmap, t_data img, t_mapinfo info)
-{
-	int	i;
-	int	j;
-	int	chunkl;
-	
-	if (info.chunk_x > info.chunk_y)
-		chunkl = info.chunk_y;
-	else
-		chunkl = info.chunk_x;
-	if (cmap.type == '1')
-	{
-		i = 0;
-		while (i++ < chunkl)
-		{
-			j = 0;
-			while (j++ < chunkl)
-				my_mlx_pixel_put(&img, cmap.x * chunkl + i, cmap.y * chunkl + j, 0x00FFFFFF);
-		}
-	}
-	else if (cmap.type == 'N')
-	{
-		i = 0;
-		while (i++ < chunkl)
-		{
-			j = 0;
-			while (j++ < chunkl)
-				my_mlx_pixel_put(&img, cmap.x * chunkl + i, cmap.y * chunkl + j, 0x0000FF00);
-		}
-	}
-}*/
-
 void	error_handler(int argc, char **argv)
 {
 	if (argc != 2)
@@ -46,7 +14,7 @@ void	error_handler(int argc, char **argv)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_params	p;
 
@@ -56,14 +24,11 @@ int main(int argc, char **argv)
 	if (init_all(&p) == 1)
 		return (1);
 	p.vmlx.mlx_ptr = mlx_init(); //sécuriser malloc?
-	p.vmlx.win_ptr = mlx_new_window(p.vmlx.mlx_ptr, p.vmlx.size_winx, p.vmlx.size_winy, p.vmlx.title);
-	//load_textures(&p, p.v.west, 0);
-	//load_textures(&p, p.v.east, 0);
-	//load_textures(&p, p.v.north, 0);
-	//load_textures(&p, p.v.south, 0);
+	p.vmlx.win_ptr = mlx_new_window(p.vmlx.mlx_ptr, \
+		p.vmlx.size_winx, p.vmlx.size_winy, p.vmlx.title);
 	drawing_map(&p);
-	mlx_hook(p.vmlx.win_ptr, 2, 1L<<0, key_hook, &p);
-	mlx_hook(p.vmlx.win_ptr, 17, 1L<<0, close_window, &p);
+	mlx_hook(p.vmlx.win_ptr, 2, 1L << 0, key_hook, &p);
+	mlx_hook(p.vmlx.win_ptr, 17, 1L << 0, close_window, &p);
 	mlx_loop(p.vmlx.mlx_ptr);
-    return (0);
+	return (0);
 }

@@ -11,10 +11,10 @@
 # include "libft/libft.h"
 # include "libft/get_next_line.h"
 
-# define 	FLOOR = 0
-# define	WALL = 1
-# define	TRUE 2
-# define	FALSE 3
+# define FLOOR = 0
+# define WALL = 1
+# define TRUE 2
+# define FALSE 3
 
 typedef struct s_data
 {
@@ -50,11 +50,11 @@ typedef struct s_vars
 	int		fd;
 }	t_vars;
 
-typedef	struct s_mapinfo
+typedef struct s_mapinfo
 {
-	int	points;
-	int	size_x;
-	int	size_y;
+	int		points;
+	int		size_x;
+	int		size_y;
 	double	start_x;
 	double	start_y;
 	double	dir_x;
@@ -63,7 +63,7 @@ typedef	struct s_mapinfo
 	int		map_y;
 }	t_mapinfo;
 
-typedef struct	s_cam
+typedef struct s_cam
 {
 	double	camera_x;
 	double	plane_x;
@@ -101,12 +101,12 @@ typedef struct s_tex
 
 typedef struct s_map
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	char	type;
 }	t_map;
 
-typedef struct	s_params
+typedef struct s_params
 {
 	t_map		*map;
 	t_cam		cam;
@@ -117,45 +117,45 @@ typedef struct	s_params
 	t_tex		*tex;
 }	t_params;
 
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	parse_file(t_vars *vars);
-void	ft_free_tab(char **tab);
-void	init_vars(t_varmlx *varmlx, t_vars *vars, char *file);
-int		init_all(t_params *p);
-t_map	*init_map(char **parsed_data, t_mapinfo info);
-int		init_playerpos(t_map *cmap, t_mapinfo *info, t_cam *cam);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		parse_file(t_vars *vars);
+void		ft_free_tab(char **tab);
+void		init_vars(t_varmlx *varmlx, t_vars *vars, char *file);
+int			init_all(t_params *p);
+void		init_dir(char cardinal, t_mapinfo *info, t_cam *cam);
+t_map		*init_map(char **parsed_data, t_mapinfo info);
+int			init_playerpos(t_map *cmap, t_mapinfo *info, t_cam *cam);
 t_mapinfo	count_points_in_tab(char **tab);
-void	movement(int keycode, t_params *prms);
-void	rotation_camera(int keycode, t_params *p);
-void	floor_cast(t_params	*p);
-void	raycast_lines(t_params *p);
-int		iscubfile(char *file);
-void	drawing_map(t_params *p);
-void	draw_line(t_cam cam, t_data img, t_tex tex, int x, int s_wy);
-int		key_hook(int keycode, t_params *prms);
-int		close_window(t_params *prms);
-int		get_tex_x(t_cam cam, t_mapinfo info, t_tex tex);
-int		get_text_pixel(t_tex tex);
-//int		load_textures(t_tex *tex, t_varmlx vmlx, char *texture_path);
-int		load_textures(t_params *p, char *texture_path, int i);
+void		movement(int keycode, t_params *prms);
+void		rotation_camera(int keycode, t_params *p);
+void		rotation_camera2(int keycode, t_params *p);
+void		floor_cast(t_params	*p);
+void		raycast_lines(t_params *p);
+int			iscubfile(char *file);
+void		drawing_map(t_params *p);
+void		draw_line(t_params p, int x, int s_wy);
+int			key_hook(int keycode, t_params *prms);
+int			close_window(t_params *prms);
+int			get_tex_x(t_cam cam, t_mapinfo info, t_tex tex);
+int			get_text_pixel(t_tex tex);
+int			load_textures(t_params *p, char *texture_path, int i);
 //parsing
-void	check_map(t_vars *vars);
-void	parse_file(t_vars *vars);
-void	get_colors(t_vars *vars);
-void	check_vars(t_vars *vars);
-void	fail(char *str, t_vars *vars);
-void	get_east(t_vars *vars, int i);
-void	get_west(t_vars *vars, int i);
-void	get_floor(t_vars *vars, int i);
-void	get_south(t_vars *vars, int i);
-void	get_north(t_vars *vars, int i);
-void	get_ceiling(t_vars *vars, int i);
-void	check_all_color(t_vars *vars, int i);
-char	**ft_splitv2(const char *str, char c);
-int		map_char(char c);
-int		check_path_and_colors(t_vars *vars);
-int		strlen_itoc(char *str, int i, char c);
-int		strlen_itoc(char *str, int i, char c);
+void		check_map(t_vars *vars);
+void		parse_file(t_vars *vars);
+void		get_colors(t_vars *vars);
+void		check_vars(t_vars *vars);
+void		fail(char *str, t_vars *vars);
+void		get_east(t_vars *vars, int i);
+void		get_west(t_vars *vars, int i);
+void		get_floor(t_vars *vars, int i);
+void		get_south(t_vars *vars, int i);
+void		get_north(t_vars *vars, int i);
+void		get_ceiling(t_vars *vars, int i);
+void		check_all_color(t_vars *vars, int i);
+char		**ft_splitv2(const char *str, char c);
+int			map_char(char c);
+int			check_path_and_colors(t_vars *vars);
+int			strlen_itoc(char *str, int i, char c);
+int			strlen_itoc(char *str, int i, char c);
 
 #endif

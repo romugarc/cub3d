@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	movement(int keycode, t_params *prms)
 {
@@ -16,7 +16,6 @@ void	movement(int keycode, t_params *prms)
 	{
 		prms->info.start_x += prms->cam.plane_x;
 		prms->info.start_y += prms->cam.plane_y;
-
 	}
 	else if (keycode == 97)
 	{

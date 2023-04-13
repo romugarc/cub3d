@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	close_window(t_params *prms)
 {
@@ -21,8 +21,10 @@ int	key_hook(int keycode, t_params *prms)
 {
 	if (keycode == 65307)
 		close_window(prms);
-	if ((keycode >= 65361 && keycode <= 65364))
+	if (keycode == 65361)
 		rotation_camera(keycode, prms);
+	if (keycode == 65363)
+		rotation_camera2(keycode, prms);
 	else if (keycode == 119 || keycode == 97
 		|| keycode == 115 || keycode == 100)
 		movement(keycode, prms);

@@ -1,15 +1,17 @@
 NAME	= cub3D
 
 SRCS	=	main.c					\
-			cub_utils.c				\
-			free_functions.c		\
-			init.c					\
-			movement.c				\
-			rotation_camera.c		\
-			raycast_lines.c			\
-			load_textures.c			\
-			draw.c					\
-			hooks.c					\
+			exec/cub_utils.c		\
+			exec/free_functions.c	\
+			exec/init.c				\
+			exec/init_dir.c			\
+			exec/movement.c			\
+			exec/rotation_camera.c	\
+			exec/raycast_lines.c	\
+			exec/floor_cast.c		\
+			exec/load_textures.c	\
+			exec/draw.c				\
+			exec/hooks.c			\
 									\
 			parsing/fail.c			\
 			parsing/parsing.c		\
@@ -32,7 +34,7 @@ OBJS	=	${SRCS:.c=.o}
 CC		=	gcc
 RM		=	rm -f
 
-CFLAGS	=	-Wall -Wextra -g #-Werror #-fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address #-g #-Werror
 
 LFLAGS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 

@@ -1,11 +1,13 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	load_textures(t_params *p, char *texture_path, int i)
 {
-	p->tex[i].text = mlx_xpm_file_to_image(p->vmlx.mlx_ptr, texture_path, &p->tex[i].width_img, &p->tex[i].height_img);
+	p->tex[i].text = mlx_xpm_file_to_image(p->vmlx.mlx_ptr, texture_path, \
+		&p->tex[i].width_img, &p->tex[i].height_img);
 	if (p->tex[i].text == NULL)
 		return (1);
-	p->tex[i].text_adr = mlx_get_data_addr(p->tex[i].text, &p->tex[i].bits_per_pixel, &p->tex[i].line_length, &p->tex[i].endian);
+	p->tex[i].text_adr = mlx_get_data_addr(p->tex[i].text, \
+		&p->tex[i].bits_per_pixel, &p->tex[i].line_length, &p->tex[i].endian);
 	if (p->tex[i].text_adr == NULL)
 		return (1);
 	return (0);
@@ -19,7 +21,8 @@ int	get_text_pixel(t_tex tex)
 		return (0);
 	if (tex.tex_y < 0 || tex.tex_y >= tex.height_img)
 		return (0);
-	color = *(int *)(tex.text_adr + tex.tex_y * tex.line_length + tex.tex_x * tex.bits_per_pixel / 8);
+	color = *(int *)(tex.text_adr + tex.tex_y * tex.line_length \
+		+ tex.tex_x * tex.bits_per_pixel / 8);
 	return (color);
 }
 

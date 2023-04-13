@@ -6,17 +6,17 @@
 /*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:28:21 by warnora           #+#    #+#             */
-/*   Updated: 2023/04/04 01:27:58 by warnora          ###   ########.fr       */
+/*   Updated: 2023/04/13 10:56:55 by warnora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 t_mapinfo	count_points_in_tab(char **tab)
 {
 	t_mapinfo	info;
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 
 	info.points = 0;
 	info.size_y = 0;

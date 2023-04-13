@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	init_vars(t_varmlx *varmlx, t_vars *vars, char *file)
 {
@@ -45,38 +45,6 @@ t_map	*init_map(char **parsed_data, t_mapinfo info)
 	return (map);
 }
 
-void	init_dir(char cardinal, t_mapinfo *info, t_cam *cam)
-{
-	if (cardinal == 'N')
-	{
-		info->dir_x = 0;
-		info->dir_y = -1;
-		cam->plane_x = 0.66;
-		cam->plane_y = 0;
-	}
-	else if (cardinal == 'S')
-	{
-		info->dir_x = 0;
-		info->dir_y = 1;
-		cam->plane_x = -0.66;
-		cam->plane_y = 0;
-	}
-	else if (cardinal == 'W')
-	{
-		info->dir_x = -1;
-		info->dir_y = 0;
-		cam->plane_x = 0;
-		cam->plane_y = -0.66;
-	}
-	else if (cardinal == 'E')
-	{
-		info->dir_x = 1;
-		info->dir_y = 0;
-		cam->plane_x = 0;
-		cam->plane_y = 0.66;
-	}
-}
-
 int	init_playerpos(t_map *cmap, t_mapinfo *info, t_cam *cam)
 {
 	int	k;
@@ -99,11 +67,6 @@ int	init_playerpos(t_map *cmap, t_mapinfo *info, t_cam *cam)
 	return (0);
 }
 
-void	init_mapinfo(t_params *p)
-{
-	init_playerpos(p->map, &p->info, &p->cam);
-}
-
 void	init_cam(t_params *p)
 {
 	p->cam.hit = 0;
@@ -123,7 +86,7 @@ int	init_all(t_params *p)
 		free(p->tex);
 		return (1);
 	}
-	init_mapinfo(p);
+	init_playerpos(p->map, &p->info, &p->cam);
 	init_cam(p);
 	return (0);
 }
