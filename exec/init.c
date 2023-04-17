@@ -77,9 +77,6 @@ void	init_cam(t_params *p)
 int	init_all(t_params *p)
 {
 	p->info = count_points_in_tab(p->v.map_data);
-	p->tex = malloc(sizeof(t_tex) * (4 + 1));
-	if (!p->tex)
-		return (1);
 	p->map = init_map(p->v.map_data, p->info);
 	if (!p->map)
 	{

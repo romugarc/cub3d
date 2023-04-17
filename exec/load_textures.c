@@ -1,16 +1,40 @@
 #include "../cub3d.h"
 
-int	load_textures(t_params *p, char *texture_path, int i)
+static int	load_single_text(t_tex *tex, t_varmlx vmlx, char *texture_path)
 {
-	p->tex[i].text = mlx_xpm_file_to_image(p->vmlx.mlx_ptr, texture_path, \
-		&p->tex[i].width_img, &p->tex[i].height_img);
-	if (p->tex[i].text == NULL)
+	tex->text = mlx_xpm_file_to_image(vmlx.mlx_ptr, texture_path, \
+		&tex->width_img, &tex->height_img);
+	if (tex->text == NULL)
 		return (1);
-	p->tex[i].text_adr = mlx_get_data_addr(p->tex[i].text, \
-		&p->tex[i].bits_per_pixel, &p->tex[i].line_length, &p->tex[i].endian);
-	if (p->tex[i].text_adr == NULL)
+	tex->text_adr = mlx_get_data_addr(tex->text, \
+		&tex->bits_per_pixel, &tex->line_length, &tex->endian);
+	if (tex->text_adr == NULL)
 		return (1);
 	return (0);
+}
+
+t_tex *load_all_textures(t_varmlx vmlx, t_vars v)
+{
+	t_tex	*tex;
+	int		i;
+
+	tex = malloc(sizeof(t_tex) * 4);
+	i = 0;
+	while (i < 4)
+	{
+		tex[i].text = NULL;
+		tex[i].text_adr = NULL;
+		i++;
+	}
+	if (load_single_text(&tex[0], vmlx, v.east) == 1)
+		return (NULL);
+	if (load_single_text(&tex[1], vmlx, v.south) == 1)
+		return (NULL);
+	if (load_single_text(&tex[2], vmlx, v.west) == 1)
+		return (NULL);
+	if (load_single_text(&tex[3], vmlx, v.north) == 1)
+		return (NULL);
+	return (tex);
 }
 
 int	get_text_pixel(t_tex tex)

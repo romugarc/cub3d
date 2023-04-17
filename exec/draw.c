@@ -38,25 +38,12 @@ void	draw_line(t_params p, int x, int s_wy)
 
 void	drawing_map(t_params *p)
 {
-	int	i;
-
 	p->img.img = \
 		mlx_new_image(p->vmlx.mlx_ptr, p->vmlx.size_winx, p->vmlx.size_winy);
 	p->img.addr = mlx_get_data_addr(p->img.img, &p->img.bits_per_pixel, \
 		&p->img.line_length, &p->img.endian);
 	floor_cast(p);
-	load_textures(p, p->v.east, 0);
-	load_textures(p, p->v.south, 1);
-	load_textures(p, p->v.west, 2);
-	load_textures(p, p->v.north, 3);
 	raycast_lines(p);
-	i = 0;
-	while (i < 4)
-	{
-		free(p->tex[i].text);
-		free(p->tex[i].text_adr);
-		i++;
-	}
 	mlx_put_image_to_window(p->vmlx.mlx_ptr, p->vmlx.win_ptr, p->img.img, 0, 0);
 	mlx_destroy_image(p->vmlx.mlx_ptr, p->img.img);
 }

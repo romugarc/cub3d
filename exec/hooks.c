@@ -12,8 +12,15 @@ int	close_window(t_params *prms)
 	free(prms->v.floor);
 	free(prms->v.ceiling);
 	free(prms->map);
-	free(prms->tex);
 	close(prms->v.fd);
+	/*i = 0;
+	while (i < 4)
+	{
+		//free(prms->tex[i].text);
+		free(prms->tex[i].text_adr);
+		i++;
+	}
+	//free(prms->tex);*/
 	exit(0);
 }
 

@@ -26,6 +26,9 @@ int	main(int argc, char **argv)
 	p.vmlx.mlx_ptr = mlx_init(); //sécuriser malloc?
 	p.vmlx.win_ptr = mlx_new_window(p.vmlx.mlx_ptr, \
 		p.vmlx.size_winx, p.vmlx.size_winy, p.vmlx.title);
+	p.tex = load_all_textures(p.vmlx, p.v);
+	if (!p.tex)
+		close_window(&p);
 	drawing_map(&p);
 	mlx_hook(p.vmlx.win_ptr, 2, 1L << 0, key_hook, &p);
 	mlx_hook(p.vmlx.win_ptr, 17, 1L << 0, close_window, &p);
