@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_south.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
-/*   Updated: 2023/02/27 19:36:06 by warnora          ###   ########.fr       */
+/*   Created: 2023/04/18 18:47:39 by fsariogl          #+#    #+#             */
+/*   Updated: 2023/04/18 18:47:41 by fsariogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	get_south(t_vars *vars, int i)
 		i++;
 	if (vars->gnl_ret[i] == '\0')
 		fail("Error\nMissing path for south\n", vars);
-	vars->south = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
+	vars->south = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0')
+				+ 1));
 	if (!vars->south)
 		fail("Malloc error !", vars);
 	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/18 18:49:19 by fsariogl          #+#    #+#             */
+/*   Updated: 2023/04/18 18:50:19 by fsariogl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 # include <stdio.h>
@@ -139,7 +151,8 @@ int			close_window(t_params *prms);
 int			get_tex_x(t_cam cam, t_mapinfo info, t_tex tex);
 int			get_text_pixel(t_tex tex);
 int			load_textures(t_params *p, char *texture_path, int i);
-t_tex 		*load_all_textures(t_varmlx vmlx, t_vars v);
+t_tex		*load_all_textures(t_varmlx vmlx, t_vars v);
+
 //parsing
 void		check_map(t_vars *vars);
 void		parse_file(t_vars *vars);

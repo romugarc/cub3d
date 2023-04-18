@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
-/*   Updated: 2023/03/31 11:05:36 by warnora          ###   ########.fr       */
+/*   Created: 2023/04/18 18:47:56 by fsariogl          #+#    #+#             */
+/*   Updated: 2023/04/18 18:47:58 by fsariogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	check_double(t_vars *vars, int i)
 		fail("Error\nPut three colors for the ceiling one time\n", vars);
 	else if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != 'F'
 		&& c != 'C' && c != '1' && c != '\n')
-			fail("Error\nPut path, colors and closed map only\n", vars);
+		fail("Error\nPut path, colors and closed map only\n", vars);
 }
 
 static int	checking(t_vars *vars, int *mapping)

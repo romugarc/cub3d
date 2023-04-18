@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_next.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
-/*   Updated: 2023/02/27 19:36:06 by warnora          ###   ########.fr       */
+/*   Created: 2023/04/18 18:47:48 by fsariogl          #+#    #+#             */
+/*   Updated: 2023/04/18 18:47:50 by fsariogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	map_char(char c)
 int	check_path_and_colors(t_vars *vars)
 {
 	if (!(vars->north && vars->south && vars->east && vars->west
-		&& vars->floor && vars->ceiling))
-			return (FALSE);
+			&& vars->floor && vars->ceiling))
+		return (FALSE);
 	return (TRUE);
 }

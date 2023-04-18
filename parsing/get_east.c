@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_east.c                                          :+:      :+:    :+:   */
+/*   get_east.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
-/*   Updated: 2023/02/27 19:36:06 by warnora          ###   ########.fr       */
+/*   Created: 2023/04/18 18:47:23 by fsariogl          #+#    #+#             */
+/*   Updated: 2023/04/18 18:47:26 by fsariogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	check_path(t_vars *vars, int *i, int *j)
 {
-		vars->east[(*j)] = vars->gnl_ret[(*i)];
-		(*i) = (*i) + 1;
-		(*j) = (*j) + 1;
+	vars->east[(*j)] = vars->gnl_ret[(*i)];
+	(*i) = (*i) + 1;
+	(*j) = (*j) + 1;
 }
 
 void	get_east(t_vars *vars, int i)
@@ -34,7 +34,8 @@ void	get_east(t_vars *vars, int i)
 		i++;
 	if (vars->gnl_ret[i] == '\0')
 		fail("Error\nMissing path for east\n", vars);
-	vars->east = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
+	vars->east = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0')
+				+ 1));
 	if (!vars->east)
 		fail("Malloc error !", vars);
 	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')

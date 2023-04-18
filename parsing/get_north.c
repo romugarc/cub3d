@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_north.c                                          :+:      :+:    :+:   */
+/*   get_north.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
-/*   Updated: 2023/02/27 19:36:06 by warnora          ###   ########.fr       */
+/*   Created: 2023/04/18 18:47:35 by fsariogl          #+#    #+#             */
+/*   Updated: 2023/04/18 18:47:37 by fsariogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	get_north(t_vars *vars, int i)
 		i++;
 	if (vars->gnl_ret[i] == '\0')
 		fail("Error\nMissing path for north\n", vars);
-	vars->north = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0') + 1));
+	vars->north = malloc(sizeof(char) * (strlen_itoc(vars->gnl_ret, i, '\0')
+				+ 1));
 	if (!vars->north)
 		fail("Malloc error", vars);
 	while (vars->gnl_ret[i] && vars->gnl_ret[i] != '\n')

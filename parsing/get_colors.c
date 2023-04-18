@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: warnora <warnora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:22:30 by warnora           #+#    #+#             */
-/*   Updated: 2023/04/13 10:57:09 by warnora          ###   ########.fr       */
+/*   Created: 2023/04/18 18:47:16 by fsariogl          #+#    #+#             */
+/*   Updated: 2023/04/18 18:47:19 by fsariogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	get_colors(t_vars *vars)
 	vars->color_floor = vars->color_floor + atoiv2(vars->floor, &i);
 	i = 0;
 	vars->color_ceiling = 0x00 + (((atoiv2(vars->ceiling, &i) * 256) * 256));
-	vars->color_ceiling = vars->color_ceiling + (atoiv2(vars->ceiling, &i) * 256);
+	vars->color_ceiling = vars->color_ceiling + (atoiv2(vars->ceiling, &i)
+			* 256);
 	vars->color_ceiling = vars->color_ceiling + atoiv2(vars->ceiling, &i);
 }
