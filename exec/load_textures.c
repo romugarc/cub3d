@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/03 17:11:01 by rgarcia           #+#    #+#             */
+/*   Updated: 2023/05/03 17:11:37 by rgarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 static int	load_single_text(t_tex *tex, t_varmlx vmlx, char *texture_path)
@@ -13,12 +25,39 @@ static int	load_single_text(t_tex *tex, t_varmlx vmlx, char *texture_path)
 	return (0);
 }
 
-t_tex *load_all_textures(t_varmlx vmlx, t_vars v)
+t_tex	*text_error(t_tex *tex, t_varmlx vmlx, int mode)
+{
+	if (mode == 0)
+		return (NULL);
+	if (mode == 1)
+	{
+		mlx_destroy_image(vmlx.mlx_ptr, tex[0].text);
+		return (NULL);
+	}
+	if (mode == 2)
+	{
+		mlx_destroy_image(vmlx.mlx_ptr, tex[0].text);
+		mlx_destroy_image(vmlx.mlx_ptr, tex[1].text);
+		return (NULL);
+	}
+	if (mode == 3)
+	{
+		mlx_destroy_image(vmlx.mlx_ptr, tex[0].text);
+		mlx_destroy_image(vmlx.mlx_ptr, tex[1].text);
+		mlx_destroy_image(vmlx.mlx_ptr, tex[2].text);
+		return (NULL);
+	}
+	return (NULL);
+}
+
+t_tex	*load_all_textures(t_varmlx vmlx, t_vars v)
 {
 	t_tex	*tex;
 	int		i;
 
 	tex = malloc(sizeof(t_tex) * 4);
+	if (!tex)
+		return (NULL);
 	i = 0;
 	while (i < 4)
 	{
@@ -27,13 +66,13 @@ t_tex *load_all_textures(t_varmlx vmlx, t_vars v)
 		i++;
 	}
 	if (load_single_text(&tex[0], vmlx, v.east) == 1)
-		return (NULL);
+		return (text_error(tex, vmlx, 0));
 	if (load_single_text(&tex[1], vmlx, v.south) == 1)
-		return (NULL);
+		return (text_error(tex, vmlx, 1));
 	if (load_single_text(&tex[2], vmlx, v.west) == 1)
-		return (NULL);
+		return (text_error(tex, vmlx, 2));
 	if (load_single_text(&tex[3], vmlx, v.north) == 1)
-		return (NULL);
+		return (text_error(tex, vmlx, 3));
 	return (tex);
 }
 

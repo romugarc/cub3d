@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/03 17:05:54 by rgarcia           #+#    #+#             */
+/*   Updated: 2023/05/03 17:05:59 by rgarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	error_handler(int argc, char **argv)
@@ -23,7 +35,7 @@ int	main(int argc, char **argv)
 	parse_file(&p.v);
 	if (init_all(&p) == 1)
 		return (1);
-	p.vmlx.mlx_ptr = mlx_init(); //sécuriser malloc?
+	p.vmlx.mlx_ptr = mlx_init();
 	p.vmlx.win_ptr = mlx_new_window(p.vmlx.mlx_ptr, \
 		p.vmlx.size_winx, p.vmlx.size_winy, p.vmlx.title);
 	p.tex = load_all_textures(p.vmlx, p.v);

@@ -1,8 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/03 17:08:32 by rgarcia           #+#    #+#             */
+/*   Updated: 2023/05/03 17:10:54 by rgarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 int	close_window(t_params *prms)
 {
+	if (prms->tex)
+	{
+		mlx_destroy_image(prms->vmlx.mlx_ptr, prms->tex[0].text);
+		mlx_destroy_image(prms->vmlx.mlx_ptr, prms->tex[1].text);
+		mlx_destroy_image(prms->vmlx.mlx_ptr, prms->tex[2].text);
+		mlx_destroy_image(prms->vmlx.mlx_ptr, prms->tex[3].text);
+	}
 	mlx_destroy_window(prms->vmlx.mlx_ptr, prms->vmlx.win_ptr);
+	mlx_destroy_display(prms->vmlx.mlx_ptr);
 	free(prms->vmlx.mlx_ptr);
 	ft_free_tab(prms->v.map_data);
 	free(prms->v.north);
@@ -12,15 +32,8 @@ int	close_window(t_params *prms)
 	free(prms->v.floor);
 	free(prms->v.ceiling);
 	free(prms->map);
+	free(prms->tex);
 	close(prms->v.fd);
-	/*i = 0;
-	while (i < 4)
-	{
-		//free(prms->tex[i].text);
-		free(prms->tex[i].text_adr);
-		i++;
-	}
-	//free(prms->tex);*/
 	exit(0);
 }
 
