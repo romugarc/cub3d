@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fsariogl <fsariogl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:07:38 by rgarcia           #+#    #+#             */
-/*   Updated: 2023/05/03 17:07:42 by rgarcia          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:42:35 by fsariogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	iscubfile(char *file)
 	int	i;
 
 	i = 0;
-	while (file[i] != '.' && file[i] != '\0')
+	while (file[i])
 		i++;
+	while (i > 0 && file[i] != '.')
+		i--;
 	if (file[i] != '.')
 		return (0);
 	if (file[i + 1] != 'c')
